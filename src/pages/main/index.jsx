@@ -5,15 +5,18 @@ import { Footer } from '../../components/Footer';
 import * as S from './styles';
 
 export const Main = ({
+  isPlaying,
+  setIsPlaying,
   isLoading,
   music,
   error,
   currentTrack,
   setCurrentTrack,
+  pause,
+  setPause
 }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+
   const [isBar, setIsBar] = useState(false);
-  const [pause, setPause] = useState(false);
   
   return (
     <S.Wrapper>

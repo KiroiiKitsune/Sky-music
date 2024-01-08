@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { Link } from 'react-router-dom';
-import { LogUser } from '../../api/authApi';
+import { LogUser } from '../../api/apiAuth';
 import { useNavigate } from 'react-router-dom';
 import * as S from './styles';
 

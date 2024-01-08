@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 import { LogPage } from './pages/logPage';
 import { RegPage } from './pages/regPage';
 import { Main } from './pages/main';
@@ -12,13 +13,13 @@ export const AppRoutes = ({
   onAuthButtonClick,
   isLoading,
   music,
-  isPlaying,
-  setIsPlaying,
   currentTrack,
   setCurrentTrack,
   error,
 }) => {
-  
+  const [pause, setPause] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+
   return (
     <Routes>
       <Route element={<ProtectedRoute isAllowed={user} />}>
@@ -26,6 +27,8 @@ export const AppRoutes = ({
           path='/'
           element={
             <Main
+              pause={pause}
+              setPause={setPause}
               isLoading={isLoading}
               music={music}
               isPlaying={isPlaying}
@@ -36,16 +39,29 @@ export const AppRoutes = ({
             />
           }
         />
-        <Route path='/favourites' element={<Favourites />} />
+        <Route
+          path='/favourites'
+          element={
+            <Favourites
+              pause={pause}
+              setPause={setPause}
+              music={music}
+              isLoading={isLoading}
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
+              currentTrack={currentTrack}
+              setCurrentTrack={setCurrentTrack}
+            />
+          }
+        />
         <Route path='/category/:id' element={<Category />} />
       </Route>
+      <Route path='/register' element={<RegPage />} />
       <Route
-        path='/register'
-        element={<RegPage />}
+        path='/login'
+        element={<LogPage onAuthButtonClick={onAuthButtonClick} />}
       />
-      <Route path='/login' element={<LogPage onAuthButtonClick={onAuthButtonClick}/>} 
-      />
-      <Route path='*' element={<NotFound isLoading={isLoading}/>} />
+      <Route path='*' element={<NotFound isLoading={isLoading} />} />
     </Routes>
   );
 };
