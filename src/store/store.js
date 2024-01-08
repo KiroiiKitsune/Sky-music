@@ -1,8 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import trackReducer from './reducers/track';
+import { configureStore } from "@reduxjs/toolkit";
+import tracksReducer from "./reducers/reducers";
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
-    audioplayer: trackReducer,
+    tracks: tracksReducer,
   },
 });
+
+export default store;
+ 
